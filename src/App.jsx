@@ -6,13 +6,14 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Profile from "./pages/Profile";
 import Layout from "./components/Layout";
+import Navigation from "./components/Navigation";
 
 export default function App() {
   return (
     <BrowserRouter>
      <Layout>
      <Routes>
-        <Route path="/" element={<Home />} />
+        <Route exact path="/" element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="sign-in" element={<SignIn />} />
         <Route path="sign-up" element={<SignUp />} />

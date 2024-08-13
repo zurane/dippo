@@ -7,7 +7,7 @@ export default function Layout({children}) {
     // of our application
     <div>
       <Navigation/>
-      <div style={{paddingTop : '20px'}}>
+      <div className='max-w-6xl mx-auto px-5'>
         {children}
       </div>
     </div>
