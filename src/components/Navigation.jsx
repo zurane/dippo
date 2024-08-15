@@ -8,16 +8,16 @@ export default function Navigation() {
       <header>
         <nav className="bg-light-500 shadow-sm">
           <div className="flex flex-row justify-between items-center px-5 py-4 max-w-6xl mx-auto">
-            <div className="logo flex flex-row space-x-5 items-center text-m font-semibold">
+            <div className="logo flex flex-row space-x-5 items-center text-m font-medium">
               <Link to="/">Dippo</Link>
-              <NavLink to="/">Home</NavLink>
-              <NavLink to="about">About</NavLink>
+              <NavLink className="hover:text-emrald" to="/">Home</NavLink>
+              <NavLink className="hover:text-emrald" to="about">About</NavLink>
             </div>
             <div>
               <form
                 action=""
                 method="get"
-                className="border border-slate-300 rounded-xl p-3 w-96 flex items-center justify-between "
+                className="border border-slate-300 p-3 w-96 flex items-center justify-between "
               >
                 <input
                   type="text"
@@ -30,12 +30,12 @@ export default function Navigation() {
             <div className="navigation__links">
               <ul className="flex flex-row space-x-2 font-inter text-m font-semibold">
                 <li>
-                  <NavLink className="border p-3 rounded-xl" to="sign-in">
+                  <NavLink className="border p-3 rounded text-sm" to="sign-in">
                     Login
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className="p-3 rounded-xl bg-emrald text-white" to="sign-up">
+                  <NavLink className="p-3 text-sm bg-emrald text-white rounded" to="sign-up">
                     Sign up
                   </NavLink>
                 </li>

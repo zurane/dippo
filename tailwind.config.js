@@ -4,12 +4,14 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        inter: ["inter Tight"],
+        inter: ["Rubik"],
       },
 
       colors: {
         light: "#FBFBFB",
-        emrald: "#32DE8A",
+        emrald: "#FF7640",
+        emraldLight: "#82d9aa",
+        black: "#020100",
       },
     },
   },
