@@ -11,15 +11,15 @@ import Navigation from "./components/Navigation";
 export default function App() {
   return (
     <BrowserRouter>
-     <Layout>
-     <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="sign-in" element={<SignIn />} />
-        <Route path="sign-up" element={<SignUp />} />
-        <Route path="profile" element={<Profile />} />
-      </Routes>
-     </Layout>
+      <Layout>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="sign-in" element={<SignIn />} />
+          <Route path="sign-up" element={<SignUp />} />
+          <Route path="profile" element={<Profile />} />
+        </Routes>
+      </Layout>
     </BrowserRouter>
   );
 }
