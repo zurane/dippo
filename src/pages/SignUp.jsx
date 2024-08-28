@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"; // Importing Link for navigation between routes and useNavigate for programmatic navigation
+import { Link, NavLink, useNavigate } from "react-router-dom"; // Importing Link for navigation between routes and useNavigate for programmatic navigation
 import { useState } from "react"; // Importing useState hook for managing state within the component
 // import Snackbar from "@mui/joy/Snackbar"; // Commented out Snackbar import, possibly for showing notifications
 import googleLogo from "../assets/7123025_logo_google_g_icon.svg"; // Importing a Google logo image for the "Continue with Google" button
@@ -59,11 +59,11 @@ export default function SignUp() {
         >
           <p class="font-medium text-sm">Error</p>
           <p className="text-sm">
-            User with that username or email already exists.
+            {error}
           </p>
         </div>
       )}
-      <h4 className="mb-2 text-2xl font-semibold">Create your account</h4>
+      <h4 className="mb-2 text-2xl font-semibold ">Create your account</h4>
       <p className="text-sm pb-5">
         Find the perfect place to call home with ease and peace of mind.
       </p>
@@ -72,7 +72,7 @@ export default function SignUp() {
           type="text"
           placeholder="Create username"
           id="username"
-          className="border p-3 text-sm rounded"
+          className="border p-3 py-4 text-sm rounded"
           onChange={handleChange} // Handle input changes by updating the formData state
         />
 
@@ -80,14 +80,14 @@ export default function SignUp() {
           type="email"
           placeholder="Enter your email address"
           id="email"
-          className="border p-3 text-sm rounded"
+          className="border p-3 py-4 text-sm rounded"
           onChange={handleChange} // Handle input changes by updating the formData state
         />
         <input
           type="password"
           placeholder="Create your password"
           id="password"
-          className="border p-3 text-sm rounded"
+          className="border p-3 py-4 text-sm rounded"
           onChange={handleChange} // Handle input changes by updating the formData state
         />
         <button
