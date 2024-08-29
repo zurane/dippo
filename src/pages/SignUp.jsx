@@ -50,7 +50,7 @@ export default function SignUp() {
   };
 
   return (
-    <div className="my-10 max-w-sm mx-auto  p-4 shadow-sm">
+    <div className="my-10 max-w-sm mx-auto border p-4 shadow-sm rounded">
       {/* Conditionally render an error message if there's an error */}
       {error && (
         <div
@@ -58,15 +58,16 @@ export default function SignUp() {
           role="alert"
         >
           <p class="font-medium text-sm">Error</p>
-          <p className="text-sm">
-            {error}
-          </p>
+          <p className="text-sm">{error}</p>
         </div>
       )}
-      <h4 className="mb-2 text-2xl font-semibold ">Create your account</h4>
-      <p className="text-sm pb-5">
-        Find the perfect place to call home with ease and peace of mind.
-      </p>
+
+      <div className="flex flex-row justify-between items-center pb-3">
+        <h4 className="mb-2 text-xl font-medium ">Sign up</h4>
+        <Link className="text-sm text-bold border-b border-b-3" to="/sign-in">
+          I have an account
+        </Link>
+      </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
         <input
           type="text"
@@ -90,28 +91,25 @@ export default function SignUp() {
           className="border p-3 py-4 text-sm rounded"
           onChange={handleChange} // Handle input changes by updating the formData state
         />
+        <span className="text-xs">
+          I agree to the Terms and Conditions and Privacy
+          Policy. 
+        </span>
         <button
           disabled={loading} // Disable the button if the form is in a loading state
           type="submit"
           className=" bg-black py-3 rounded text-white mt-2 hover:opacity-90"
         >
-          {loading == true ? "Loading..." : "Create account"} 
+          {loading == true ? "Loading..." : "Agree and continue"}
           {/* // Show "Loading..." while loading, otherwise "Create account" */}
         </button>
       </form>
-      <div className="py-4 text-center">
-        <p className="text-sm pb-2">
-          Already have an account?
-          <Link className="underline px-1" to="/sign-in">
-            Sign in
-          </Link> {/* Link to the sign-in page if the user already has an account */}
-        </p>
-        <span className="text-m text-slate-600">or</span>
+      <div className="my-3">
+        <button className="flex justify-center items-center  w-full bg-white border rounded shadow-sm px-2 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50 dark:text-white hover:bg-gray-25 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+          <img src={googleLogo} alt="google G logo" width={25} />
+          <span className="text-regular">Sign up with Google</span>
+        </button>
       </div>
-      <button className="flex justify-center items-center w-full bg-white border rounded shadow-sm px-6 py-1 text-sm font-medium text-gray-800 hover:bg-gray-50 dark:text-white hover:bg-gray-25 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-        <img src={googleLogo} alt="google G logo" width={40} /> {/* Google logo for the "Continue with Google" button */}
-        <span>Continue with Google</span> {/* Button label for Google sign-up */}
-      </button>
     </div>
   );
 }

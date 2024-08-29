@@ -1,14 +1,20 @@
-import { Link, useNavigate } from "react-router-dom"; // Importing Link for navigation between routes and useNavigate for programmatic navigation
-import { useState } from "react"; // Importing useState hook for managing state within the component
-// import Snackbar from "@mui/joy/Snackbar"; // Commented out Snackbar import, possibly for showing notifications
+import { Link, useNavigate } from "react-router-dom";
 import googleLogo from "../assets/7123025_logo_google_g_icon.svg"; // Importing a Google logo image for the "Continue with Google" button
+// Importing Link for navigation between routes and useNavigate for programmatic navigation
+import { useState } from "react"; // Importing useState hook for managing state within the component
+import { useDispatch, useSelector } from "react-redux"; // import use dispatch hook from redux to dispatch our actions (functions);
+import {
+  signInFailure,
+  signInSuccess,
+  signInStart,
+} from "../redux/user/userSlice"; //import our functions from our slice
+// import Snackbar from "@mui/joy/Snackbar"; // Commented out Snackbar import, possibly for showing notifications
 
 export default function SignIn() {
-  const [loading, setLoading] = useState(false); // State to manage the loading state of the form
-  const [error, setError] = useState(null); // State to manage error messages
   const [formData, setFormData] = useState({}); // State to manage form data input by the user
-
   const redirect = useNavigate(); // Hook for programmatic navigation after successful sign-up
+  const dispatch = useDispatch(); // initialize the dispatch hook / function
+  const { loading, error } = useSelector((state) => state.currentUser);
 
   const handleChange = (e) => {
     setFormData({
@@ -19,10 +25,8 @@ export default function SignIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission which refreshes the page
-
     try {
-      setLoading(true); // Set loading to true when starting the submission process
-
+      dispatch(signInStart()); // Set loading to true when starting the submission process
       const res = await fetch("/api/auth/sign-in", {
         method: "POST", // Set the HTTP method to GET
         headers: {
@@ -30,27 +34,21 @@ export default function SignIn() {
         },
         body: JSON.stringify(formData), // Convert the form data object into a JSON string to send in the request body
       });
-
       const data = await res.json(); // Parse the JSON response from the server
       console.log(data); // Log the response data (for debugging purposes)
-
       if (data.success === false) {
-        setLoading(false); // Stop the loading state if there was an error
-        setError(data.message); // Set the error message state if the sign-up failed
+        dispatch(signInFailure(data.message)); // Set the error message state if the sign-up failed
         return; // Exit the function early if there was an error
       }
-
-      setLoading(false); // Stop the loading state after successful sign-up
-      setError(null); // Clear any existing error messages
+      dispatch(signInSuccess(data));
       redirect("/"); // Redirect the user to the sign-in page
     } catch (error) {
-      setLoading(false); // Stop the loading state if there was an error during the fetch
-      setError(error.message); // Set the error state with the error message
+      dispatch(signInFailure(error.message));
     }
   };
 
   return (
-    <div className="my-10 max-w-sm mx-auto  p-4 shadow-sm">
+    <div className="my-10 max-w-sm mx-auto border p-4 shadow-sm rounded">
       {/* Conditionally render an error message if there's an error */}
       {error && (
         <div
@@ -58,15 +56,15 @@ export default function SignIn() {
           role="alert"
         >
           <p class="font-medium text-sm">Error</p>
-          <p className="text-sm">
-            {error}
-          </p>
+          <p className="text-sm">{error}</p>
         </div>
       )}
-      <h4 className="mb-2 text-2xl font-semibold">Log in your account</h4>
-      <p className="text-sm pb-5">
-        Welcome back!
-      </p>
+      <div className="flex flex-row justify-between items-center pb-3">
+        <h4 className="mb-2 text-xl font-medium ">Sign in</h4>
+        <Link className="text-sm text-bold border-b border-b-3 " to="/sign-up">
+          I don't have an account
+        </Link>
+      </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
         <input
           type="email"
@@ -87,19 +85,16 @@ export default function SignIn() {
           type="submit"
           className=" bg-black py-3 rounded text-white mt-2 hover:opacity-90"
         >
-          {loading == true ? "Loggin..." : "Log in"} 
+          {loading == true ? "Loggin..." : "Log in"}
           {/* // Show "Loading..." while loading, otherwise "Create account" */}
         </button>
       </form>
-      <div className="py-4 text-center">
-        <p className="text-sm pb-2">
-          Don't have an account?
-          <Link className="underline px-1" to="/sign-up">
-            Create account
-          </Link> {/* Link to the sign-in page if the user already has an account */}
-        </p>
+      <div className="my-3">
+        <button className="flex justify-center items-center  w-full bg-white border rounded shadow-sm px-2 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50 dark:text-white hover:bg-gray-25 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+          <img src={googleLogo} alt="google G logo" width={25} />
+          <span className="text-regular">Sign in with Google</span>
+        </button>
       </div>
-    
     </div>
   );
 }
