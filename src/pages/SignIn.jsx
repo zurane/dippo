@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import googleLogo from "../assets/7123025_logo_google_g_icon.svg"; // Importing a Google logo image for the "Continue with Google" button
 // Importing Link for navigation between routes and useNavigate for programmatic navigation
 import { useState } from "react"; // Importing useState hook for managing state within the component
 import { useDispatch, useSelector } from "react-redux"; // import use dispatch hook from redux to dispatch our actions (functions);
@@ -8,6 +7,7 @@ import {
   signInSuccess,
   signInStart,
 } from "../redux/user/userSlice"; //import our functions from our slice
+import OAuth from "../components/OAuth";
 // import Snackbar from "@mui/joy/Snackbar"; // Commented out Snackbar import, possibly for showing notifications
 
 export default function SignIn() {
@@ -55,7 +55,7 @@ export default function SignIn() {
           className="bg-orange-100 border-l-4 my-2 border-orange-500 text-orange-700 p-2"
           role="alert"
         >
-          <p class="font-medium text-sm">Error</p>
+          <p className="font-medium text-sm">Error</p>
           <p className="text-sm">{error}</p>
         </div>
       )}
@@ -85,16 +85,11 @@ export default function SignIn() {
           type="submit"
           className=" bg-black py-3 rounded text-white mt-2 hover:opacity-90"
         >
-          {loading == true ? "Loggin..." : "Log in"}
+          {loading == true ? "Loggin..." : "Sign in"}
           {/* // Show "Loading..." while loading, otherwise "Create account" */}
         </button>
       </form>
-      <div className="my-3">
-        <button className="flex justify-center items-center  w-full bg-white border rounded shadow-sm px-2 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50 dark:text-white hover:bg-gray-25 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-          <img src={googleLogo} alt="google G logo" width={25} />
-          <span className="text-regular">Sign in with Google</span>
-        </button>
-      </div>
+      <OAuth/>
     </div>
   );
 }

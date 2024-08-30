@@ -1,7 +1,7 @@
 import { Link, NavLink, useNavigate } from "react-router-dom"; // Importing Link for navigation between routes and useNavigate for programmatic navigation
 import { useState } from "react"; // Importing useState hook for managing state within the component
 // import Snackbar from "@mui/joy/Snackbar"; // Commented out Snackbar import, possibly for showing notifications
-import googleLogo from "../assets/7123025_logo_google_g_icon.svg"; // Importing a Google logo image for the "Continue with Google" button
+import OAuth from "../components/OAuth";
 
 export default function SignUp() {
   const [loading, setLoading] = useState(false); // State to manage the loading state of the form
@@ -11,6 +11,7 @@ export default function SignUp() {
   const redirect = useNavigate(); // Hook for programmatic navigation after successful sign-up
 
   const handleChange = (e) => {
+    console.log(formData);
     setFormData({
       ...formData, // Spread operator to keep existing form data
       [e.target.id]: e.target.value, // Dynamically updating the formData state with the current input value
@@ -91,9 +92,9 @@ export default function SignUp() {
           className="border p-3 py-4 text-sm rounded"
           onChange={handleChange} // Handle input changes by updating the formData state
         />
-        <span className="text-xs">
-          I agree to the Terms and Conditions and Privacy
-          Policy. 
+        <span className="text-xs pt-2 text-slate-500 font-light">
+          By signing up, you agree to our Terms and Conditions and Privacy
+          Policy.
         </span>
         <button
           disabled={loading} // Disable the button if the form is in a loading state
@@ -104,12 +105,7 @@ export default function SignUp() {
           {/* // Show "Loading..." while loading, otherwise "Create account" */}
         </button>
       </form>
-      <div className="my-3">
-        <button className="flex justify-center items-center  w-full bg-white border rounded shadow-sm px-2 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50 dark:text-white hover:bg-gray-25 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-          <img src={googleLogo} alt="google G logo" width={25} />
-          <span className="text-regular">Sign up with Google</span>
-        </button>
-      </div>
+      <OAuth />
     </div>
   );
 }
