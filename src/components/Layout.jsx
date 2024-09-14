@@ -7,7 +7,7 @@ export default function Layout({children}) {
     // of our application
     <div>
       <Navigation/>
-      <div className='max-w-6xl mx-auto px-5'>
+      <div className='max-w-6xl mx-auto'>
         {children}
       </div>
     </div>

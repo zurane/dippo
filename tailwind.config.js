@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         inter: ["Rubik"],
+        ubuntu: ["ubuntu"]
       },
 
       colors: {
